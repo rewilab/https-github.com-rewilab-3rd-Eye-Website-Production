@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /cgi-bin/
+Disallow: /private/
+Disallow: /tmp/
+
+Sitemap: https://www.3rd-eye.in/sitemap.xml
+Host: www.3rd-eye.in
