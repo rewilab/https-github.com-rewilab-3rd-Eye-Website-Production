@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://www.3rd-eye.in/</loc><priority>1.0</priority></url>
-<url><loc>https://www.3rd-eye.in/about.html</loc></url>
-<url><loc>https://www.3rd-eye.in/divisions.html</loc></url>
-<url><loc>https://www.3rd-eye.in/services.html</loc></url>
-<url><loc>https://www.3rd-eye.in/products.html</loc></url>
-<url><loc>https://www.3rd-eye.in/projects.html</loc></url>
-<url><loc>https://www.3rd-eye.in/partners.html</loc></url>
-<url><loc>https://www.3rd-eye.in/contact.html</loc></url>
+    <url>
+        <loc>https://www.3rd-eye.in/</loc>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://www.3rd-eye.in/about.html</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.3rd-eye.in/services.html</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.3rd-eye.in/products.html</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.3rd-eye.in/projects.html</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.3rd-eye.in/partners.html</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.3rd-eye.in/contact.html</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
 </urlset>

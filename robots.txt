@@ -1,9 +1,11 @@
 User-agent: *
 Allow: /
 
+# Block system folders (adjust as needed)
 Disallow: /cgi-bin/
-Disallow: /private/
-Disallow: /tmp/
+Disallow: /includes/
+Disallow: /mail.php
+Disallow: /php/
+Disallow: /assets/
 
 Sitemap: https://www.3rd-eye.in/sitemap.xml
-Host: www.3rd-eye.in
