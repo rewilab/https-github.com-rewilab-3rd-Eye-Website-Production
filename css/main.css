@@ -209,7 +209,7 @@ textarea:focus-visible {
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../img/header-bg.jpg') no-repeat center center/cover;
+    background: linear-gradient(rgba(0,0,0,0.68), rgba(0,0,0,0.68)), url('../img/header-bg.jpg') no-repeat center center/cover;
     color: var(--white);
     text-align: center;
     padding: 150px 20px;
@@ -220,7 +220,6 @@ textarea:focus-visible {
 }
 
 .hero-section.home-hero {
-    background-size: auto, contain;
     background-position: center center, center center;
     background-color: var(--dark-navy);
 }

@@ -47,22 +47,9 @@
     <section id="corporate-contact" class="bg-light-gray">
         <div class="container">
             <h2>Corporate Contact Information</h2>
-            <div class="grid-2-cols contact-info-grid">
-                <div>
-                    <h3>Office Address</h3>
-                    <address>
-                        [Physical Address Line 1]<br>
-                        [Physical Address Line 2]<br>
-                        [City, Postal Code]<br>
-                        [Country]
-                    </address>
-                </div>
-                <div>
-                    <h3>Connect with Us</h3>
-                    <p><strong>Telephone:</strong> <a href="tel:+">[Your Phone Number]</a></p>
-                    <p><strong>Email:</strong> <a href="mailto:info@3rdeyeoilfield.com">info@3rdeyeoilfield.com</a></p>
-                    <p><strong>Business Hours:</strong> Monday - Friday, 9:00 AM - 6:00 PM (IST)</p>
-                </div>
+            <div class="contact-info-grid">
+                <h3>Connect with Us</h3>
+                <p><strong>Email:</strong> <a href="mailto:hello@3rd-eye.in">hello@3rd-eye.in</a></p>
             </div>
         </div>
     </section>
@@ -70,7 +57,7 @@
     <section id="contact-form-section" class="about-section">
         <div class="container">
             <h2>Send Us a Message</h2>
-            <form class="contact-form" action="mail.php" method="post" novalidate>
+            <form class="contact-form" action="mail.php" method="POST" novalidate>
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" required aria-required="true">
@@ -88,8 +75,8 @@
                     <input type="email" id="email" name="email" required aria-required="true">
                 </div>
                 <div class="form-group">
-                    <label for="telephone">Telephone</label>
-                    <input type="tel" id="telephone" name="telephone">
+                    <label for="phone">Telephone</label>
+                    <input type="tel" id="phone" name="phone">
                 </div>
                 <div class="form-group">
                     <label for="subject">Subject</label>
@@ -110,21 +97,12 @@
                     <label for="message">Message</label>
                     <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
                 </div>
-                <div class="form-group checkbox-group">
+                <div class="form-group form-check">
                     <input type="checkbox" id="privacy-consent" name="privacy-consent" required aria-required="true">
-                    <label for="privacy-consent">I agree to the <a href="#privacy-policy" target="_blank">Privacy Policy</a></label>
+                    <label for="privacy-consent">I agree to the Privacy Policy</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit Message</button>
             </form>
-        </div>
-    </section>
-
-    <section id="google-maps" class="bg-light-gray">
-        <div class="container">
-            <h2>Our Global Presence</h2>
-            <div class="map-placeholder" style="height: 400px; background-color: #ddd; display: flex; align-items: center; justify-content: center; color: #555; font-size: 1.2em;">
-                [Google Maps Placeholder - Embed Map Here]
-            </div>
         </div>
     </section>
 
@@ -161,7 +139,7 @@
             <h2>Frequently Asked Questions</h2>
             <div class="faq-item">
                 <h3>What is the best way to contact 3rd Eye Oilfield Supply & Services LLP?</h3>
-                <p>You can reach us via the contact form on this page, or directly through our corporate email or telephone provided above.</p>
+                <p>You can reach us via the contact form on this page, or directly through our corporate email provided above.</p>
             </div>
             <div class="faq-item">
                 <h3>Do you offer international services and procurement?</h3>
@@ -170,10 +148,6 @@
             <div class="faq-item">
                 <h3>How quickly can I expect a response to my enquiry?</h3>
                 <p>We aim to respond to all enquiries within 24-48 business hours. For urgent matters, please consider calling us during business hours.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Where can I find your Privacy Policy?</h3>
-                <p>Our Privacy Policy is available via the link in the contact form or through the main footer of our website.</p>
             </div>
         </div>
     </section>
