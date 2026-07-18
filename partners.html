@@ -13,18 +13,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="site-header">
         <div class="container">
-            <nav class="main-nav">
-                <a href="index.html" class="logo">3rd Eye Oilfield Supply & Services LLP</a>
-                <ul class="nav-links">
-                    <li><a href="index.html#hero">Home</a></li>
+            <nav class="main-nav" aria-label="Primary navigation">
+                <a href="index.html" class="logo" aria-label="3rd Eye Oilfield Supply &amp; Services LLP home">3rd Eye Oilfield Supply &amp; Services LLP</a>
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="nav-toggle-icon"></span>
+                </button>
+                <ul id="nav-menu" class="nav-links">
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="products.html">Products</a></li>
                     <li><a href="projects.html">Projects</a></li>
-                    <li><a href="#hero">Partners</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="partners.html" aria-current="page">Partners</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -345,7 +349,7 @@
         </div>
     </section>
 
-    <footer class="site-footer">
+    <footer class="site-footer" aria-label="Site footer">
         <div class="container">
             <p>&copy; 2026 3rd Eye Oilfield Supply & Services LLP. All rights reserved.</p>
         </div>

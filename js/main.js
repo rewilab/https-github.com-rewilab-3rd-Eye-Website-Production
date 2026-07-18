@@ -9,14 +9,40 @@ window.addEventListener("scroll", () => {
 });
 
 // Mobile Navigation Toggle (Hamburger Menu)
-// Assuming you might add a hamburger icon in HTML later, 
-// for now, this toggles the visibility of .nav-links on smaller screens
-const navToggle = document.querySelector(".nav-toggle"); // Placeholder for a future hamburger icon
+const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 
-if (navToggle) {
+if (navToggle && navLinks) {
     navToggle.addEventListener("click", () => {
+        const isExpanded = navToggle.getAttribute("aria-expanded") === "true";
+        navToggle.setAttribute("aria-expanded", !isExpanded);
         navLinks.classList.toggle("active");
+        
+        // Toggle body scroll lock when menu is open
+        if (!isExpanded) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+    });
+    
+    // Close menu when clicking on a link
+    navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            navToggle.setAttribute("aria-expanded", "false");
+            navLinks.classList.remove("active");
+            document.body.style.overflow = "";
+        });
+    });
+    
+    // Close menu on escape key
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && navLinks.classList.contains("active")) {
+            navToggle.setAttribute("aria-expanded", "false");
+            navLinks.classList.remove("active");
+            document.body.style.overflow = "";
+            navToggle.focus();
+        }
     });
 }
 

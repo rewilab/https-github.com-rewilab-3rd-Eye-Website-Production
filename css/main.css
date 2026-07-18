@@ -349,18 +349,91 @@ section {
     margin: 0;
 }
 
+/* Mobile Navigation Toggle */
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin-left: auto;
+}
+
+.nav-toggle-icon {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--white);
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    background-color: var(--white);
+    transition: transform 0.3s ease;
+}
+
+.nav-toggle-icon::before {
+    top: -7px;
+}
+
+.nav-toggle-icon::after {
+    top: 7px;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon {
+    background-color: transparent;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon::before {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon::after {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
 /* Responsive Design */
+@media (max-width: 1024px) {
+    .nav-links {
+        gap: 20px;
+    }
+    
+    .nav-links li {
+        margin-left: 0;
+    }
+}
+
 @media (max-width: 768px) {
+    .site-header {
+        padding: 15px 0;
+    }
+
     .main-nav {
-        flex-direction: column;
-        text-align: center;
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        font-size: 1.3em;
+    }
+
+    .nav-toggle {
+        display: block;
     }
 
     .nav-links {
+        display: none;
         flex-direction: column;
-        margin-top: 20px;
-        display: none; /* Hidden by default for mobile menu toggle */
         width: 100%;
+        margin-top: 20px;
+        padding: 20px 0;
+        border-top: 1px solid rgba(255,255,255,0.1);
     }
 
     .nav-links.active {
@@ -368,23 +441,61 @@ section {
     }
 
     .nav-links li {
-        margin: 10px 0;
+        margin: 0;
+        text-align: center;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 12px 0;
+        font-size: 1.1em;
     }
 
     .hero-content h1 {
-        font-size: 3em;
+        font-size: 2.5em;
     }
 
     .hero-content .tagline {
-        font-size: 1.4em;
+        font-size: 1.2em;
     }
 
     h2 {
-        font-size: 2em;
+        font-size: 1.8em;
     }
 
     .sector-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.1em;
+    }
+
+    .hero-content h1 {
+        font-size: 2em;
+    }
+
+    .hero-content .tagline {
+        font-size: 1em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+
+    section {
+        padding: 50px 0;
+    }
+
+    .contact-form {
+        padding: 20px;
     }
 }
 
