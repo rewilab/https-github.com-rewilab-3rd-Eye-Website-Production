@@ -72,7 +72,14 @@
     <section id="contact-form-section" class="about-section">
         <div class="container">
             <h2>Send Us a Message</h2>
-            <form class="contact-form" action="mail.php" method="POST" novalidate>
+            <form class="contact-form" id="contact-form" action="mail.php" method="POST" novalidate>
+                <!-- Anti-bot honeypot: real users never see/fill this. Visually hidden + aria-hidden. -->
+                <div class="hp-field" aria-hidden="true">
+                    <label for="company_website">Website (leave blank)</label>
+                    <input type="text" id="company_website" name="company_website" tabindex="-1" autocomplete="off">
+                </div>
+                <!-- Server-issued, time-bound, signed token (see mail.php). -->
+                <input type="hidden" name="form_token" id="form_token" value="">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" required aria-required="true">
@@ -117,6 +124,7 @@
                     <label for="privacy-consent">I agree to the Privacy Policy</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit Message</button>
+                <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
             </form>
         </div>
     </section>

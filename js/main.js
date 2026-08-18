@@ -99,10 +99,36 @@ animateOnScroll.forEach(element => {
     animateObserver.observe(element);
 });
 
-// Form Validation
+// Contact form: load signed anti-bot token, validate, submit via fetch, show status.
 const contactForm = document.querySelector(".contact-form");
 
+// Fetch a server-issued, time-bound, signed token on load so the form is
+// protected against forged/instant bot submissions. If the request fails the
+// field stays empty and mail.php will reject the submission gracefully.
 if (contactForm) {
+    const tokenField = contactForm.querySelector("#form_token");
+    if (tokenField) {
+        fetch("mail.php?action=form_token", { cache: "no-store" })
+            .then(r => r.ok ? r.json() : Promise.reject(r.status))
+            .then(data => { if (data && data.token) tokenField.value = data.token; })
+            .catch(() => { /* leave empty; server will guide the user to reload */ });
+    }
+}
+
+if (contactForm) {
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const statusBox = contactForm.querySelector("#form-status");
+
+    function showStatus(msg, type) {
+        if (!statusBox) return;
+        statusBox.textContent = msg;
+        statusBox.classList.remove("success", "error", "show");
+        if (type) {
+            statusBox.classList.add(type, "show");
+        }
+        statusBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
     contactForm.addEventListener("submit", function(e) {
         const nameInput = this.querySelector('input[name="name"], input[name="fname"], input[type="text"]');
         const emailInput = this.querySelector('input[type="email"]');
@@ -134,13 +160,56 @@ if (contactForm) {
             hideError(emailInput);
         }
 
-        if (isValid) {
-            // Allow the browser to submit the form to the configured backend.
-            return true;
-        } else {
+        if (!isValid) {
             e.preventDefault();
-            alert("Please correct the errors in the form.");
+            showStatus("Please correct the highlighted fields and try again.", "error");
+            return;
         }
+
+        e.preventDefault();
+
+        // Submit via fetch so the visitor stays on the page and sees a clean
+        // status message instead of a raw text response.
+        const formData = new FormData(contactForm);
+        const originalLabel = submitBtn ? submitBtn.textContent : "Submit";
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending…";
+        }
+        showStatus("Sending your message…", "");
+
+        fetch(contactForm.action, {
+            method: "POST",
+            body: formData,
+            headers: { "Accept": "text/plain" }
+        }).then(resp => resp.text().then(text => ({ ok: resp.ok, status: resp.status, text })))
+          .then(({ ok, status, text }) => {
+            if (ok) {
+                contactForm.reset();
+                showStatus(text || "Thank you. Your message has been sent.", "success");
+            } else if (status === 429) {
+                showStatus(text || "Too many submissions. Please try again later.", "error");
+            } else {
+                showStatus(text || "We could not send your message. Please review and try again.", "error");
+            }
+          })
+          .catch(() => {
+            showStatus("A network error occurred. Please check your connection and try again.", "error");
+          })
+          .finally(() => {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalLabel;
+            }
+            // Re-fetch a fresh token after the reset so the next submit is valid.
+            const tk = contactForm.querySelector("#form_token");
+            if (tk) {
+                fetch("mail.php?action=form_token", { cache: "no-store" })
+                    .then(r => r.ok ? r.json() : Promise.reject())
+                    .then(data => { if (data && data.token) tk.value = data.token; })
+                    .catch(() => {});
+            }
+          });
     });
 }
 
