@@ -150,7 +150,7 @@ textarea:focus-visible {
     background-color: var(--dark-navy);
     background-image: linear-gradient(90deg, #0A2E5C 0%, #0C3A6E 60%, #0A2E5C 100%);
     color: var(--white);
-    padding: 14px 0;
+    padding: 8px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -160,7 +160,7 @@ textarea:focus-visible {
 }
 
 .site-header.scrolled {
-    padding: 8px 0;
+    padding: 6px 0;
     box-shadow: 0 4px 18px rgba(0,0,0,0.28);
 }
 
@@ -185,7 +185,7 @@ textarea:focus-visible {
 }
 
 .logo img.logo-mark {
-    height: 92px;
+    height: 140px;
     width: auto;
     display: block;
 }
@@ -304,6 +304,7 @@ textarea:focus-visible {
 .hero-section.home-hero {
     background-position: center center, center center;
     background-color: var(--dark-navy);
+    background-size: 100% 100%, 100% 100%;
 }
 
 .hero-content {
@@ -584,11 +585,11 @@ section {
 
 @media (max-width: 480px) {
     .site-header {
-        padding: 10px 0;
+        padding: 6px 0;
     }
 
     .logo img.logo-mark {
-        height: 72px;
+        height: 110px;
     }
 
     .logo .logo-text .logo-name {
