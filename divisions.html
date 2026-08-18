@@ -6,25 +6,42 @@
 <title>Divisions | 3rd Eye</title>
 <meta name="description" content="Business divisions of 3rd Eye.">
 <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+    <link rel="mask-icon" href="img/favicon.svg" color="#0A2E5C">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<header class="site-header">
-<div class="container">
-<a class="logo" href="index.html">3rd Eye</a>
-<nav>
-<ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="about.html">About</a></li>
-<li><a href="divisions.html" class="active">Divisions</a></li>
-<li><a href="services.html">Services</a></li>
-<li><a href="products.html">Products</a></li>
-<li><a href="projects.html">Projects</a></li>
-<li><a href="partners.html">Partners</a></li>
-<li><a href="contact.html">Contact</a></li>
-</ul>
-</nav>
-</div>
-</header>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="site-header">
+        <div class="container">
+            <nav class="main-nav" aria-label="Primary navigation">
+                <a href="index.html" class="logo" aria-label="3rd Eye Oilfield Supply and Services LLP home">
+                    <img src="img/logo.svg" alt="3rd Eye logo" class="logo-mark" width="207" height="46">
+                    <span class="logo-text">
+                        <span class="logo-name">3<span class="accent">rd</span> Eye</span>
+                        <span class="logo-sub">Oilfield Supply &amp; Services LLP</span>
+                    </span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <ul class="nav-links" id="primary-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="divisions.html" aria-current="page">Divisions</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="partners.html">Partners</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
 <main>
 <section class="page-header">
@@ -39,6 +56,7 @@
 <h2>Our Divisions</h2>
 <div class="grid">
 <article><h3>Oil &amp; Gas</h3><p>Procurement, equipment, manpower and field support.</p></article>
+<article><h3>Mining &amp; Mineral Resources</h3><p>Mineral exploration, processing equipment and resource-sector supply.</p></article>
 <article><h3>Defence &amp; Security</h3><p>Lawful defence and security solutions for government and industry.</p></article>
 <article><h3>International Trade</h3><p>Global sourcing, import, export and supply-chain solutions.</p></article>
 <article><h3>Infrastructure</h3><p>Industrial equipment, EPC support and project services.</p></article>
@@ -51,7 +69,7 @@
 </section>
 </main>
 
-<footer><div class="container"><p>&copy; 2026 3rd Eye.</p></div></footer>
-<script src="js/main.js"></script>
+<footer class="site-footer" aria-label="Site footer"><div class="container"><p>&copy; 2026 3rd Eye Oilfield Supply &amp; Services LLP. All rights reserved.</p></div></footer>
+<script src="js/main.js" defer></script>
 </body>
 </html>

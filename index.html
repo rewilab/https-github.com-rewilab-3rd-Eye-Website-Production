@@ -9,7 +9,10 @@
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
     <meta name="theme-color" content="#0A2E5C">
     <link rel="canonical" href="https://www.3rd-eye.in/">
-    <link rel="icon" href="img/logo.png" type="image/png">
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+    <link rel="mask-icon" href="img/favicon.svg" color="#0A2E5C">
     <title>3rd Eye Oilfield Supply &amp; Services LLP | Global Procurement &amp; Project Solutions</title>
     <meta property="og:locale" content="en_IN">
     <meta property="og:type" content="website">
@@ -33,12 +36,24 @@
     <header class="site-header">
         <div class="container">
             <nav class="main-nav" aria-label="Primary navigation">
-                <a href="index.html" class="logo" aria-label="3rd Eye Oilfield Supply &amp; Services LLP home">3rd Eye Oilfield Supply &amp; Services LLP</a>
-                <ul class="nav-links">
-                    <li><a href="#hero" aria-current="page">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
+                <a href="index.html" class="logo" aria-label="3rd Eye Oilfield Supply and Services LLP home">
+                    <img src="img/logo.svg" alt="3rd Eye logo" class="logo-mark" width="207" height="46">
+                    <span class="logo-text">
+                        <span class="logo-name">3<span class="accent">rd</span> Eye</span>
+                        <span class="logo-sub">Oilfield Supply &amp; Services LLP</span>
+                    </span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <ul class="nav-links" id="primary-menu">
+                    <li><a href="index.html" aria-current="page">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="divisions.html">Divisions</a></li>
                     <li><a href="services.html">Services</a></li>
-                    <li><a href="#sectors">Sectors</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="partners.html">Partners</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
@@ -49,8 +64,8 @@
         <section id="hero" class="hero-section home-hero" aria-labelledby="hero-title">
             <div class="hero-content">
                 <h1 id="hero-title">3rd Eye Oilfield Supply &amp; Services LLP</h1>
-                <p class="tagline">Global Procurement • Strategic Partnerships • Integrated Project Solutions</p>
-                <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                <p class="tagline">Global Procurement &bull; Strategic Partnerships &bull; Integrated Project Solutions</p>
+                <a href="contact.html" class="btn btn-primary">Get in Touch</a>
             </div>
         </section>
 
@@ -59,14 +74,17 @@
             <h2 id="about-title">About Us</h2>
             <p>3rd Eye Oilfield Supply &amp; Services LLP is a leading international corporate entity specializing in providing comprehensive solutions across diverse sectors. With a commitment to excellence and strategic partnerships, we deliver unparalleled procurement, supply chain, and project development services globally.</p>
             <p>Our expertise spans a wide range of industries, enabling us to offer integrated solutions that meet the complex demands of our clients. We pride ourselves on our professionalism, reliability, and innovative approach to business.</p>
+            <p style="text-align:center; margin-top:24px;"><a href="about.html" class="btn btn-secondary">Learn More About Us</a></p>
         </div>
     </section>
 
     <section id="sectors" class="sectors-section" aria-labelledby="sectors-title">
         <div class="container">
             <h2 id="sectors-title">Our Business Sectors</h2>
+            <p class="sectors-intro">Nine integrated business sectors delivering end-to-end global procurement, supply and project solutions.</p>
             <div class="sector-grid">
                 <div class="sector-item">Oil &amp; Gas</div>
+                <div class="sector-item">Mining &amp; Mineral Resources</div>
                 <div class="sector-item">Defence &amp; Security</div>
                 <div class="sector-item">International Trade</div>
                 <div class="sector-item">Infrastructure</div>
@@ -75,6 +93,15 @@
                 <div class="sector-item">Procurement &amp; Supply Chain</div>
                 <div class="sector-item">Project Development</div>
             </div>
+            <p style="text-align:center; margin-top:30px; color:#555;">Covering <strong>9+ business sectors</strong> across global markets.</p>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container text-center">
+            <h2>Partner with a Global Leader</h2>
+            <p>From strategic procurement to integrated project development, 3rd Eye Oilfield Supply &amp; Services LLP is your trusted international partner.</p>
+            <a href="contact.html" class="btn btn-primary">Contact Us Today</a>
         </div>
     </section>
 
@@ -105,9 +132,9 @@
     {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "3rd Eye Oilfield Supply &amp; Services LLP",
+        "name": "3rd Eye Oilfield Supply & Services LLP",
         "url": "https://www.3rd-eye.in/",
-        "logo": "https://www.3rd-eye.in/img/logo.png",
+        "logo": "https://www.3rd-eye.in/img/logo.svg",
         "description": "Global procurement, strategic partnerships and integrated project solutions."
     }
     </script>

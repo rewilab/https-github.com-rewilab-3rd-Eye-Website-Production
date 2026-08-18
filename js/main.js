@@ -9,14 +9,25 @@ window.addEventListener("scroll", () => {
 });
 
 // Mobile Navigation Toggle (Hamburger Menu)
-// Assuming you might add a hamburger icon in HTML later, 
-// for now, this toggles the visibility of .nav-links on smaller screens
-const navToggle = document.querySelector(".nav-toggle"); // Placeholder for a future hamburger icon
+const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 
-if (navToggle) {
+if (navToggle && navLinks) {
     navToggle.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
+        const expanded = navLinks.classList.toggle("active");
+        navToggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+    });
+}
+
+// Close mobile menu when a link is clicked (helpful on single-page anchors)
+if (navLinks) {
+    navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            if (navLinks.classList.contains("active") && navToggle) {
+                navLinks.classList.remove("active");
+                navToggle.setAttribute("aria-expanded", "false");
+            }
+        });
     });
 }
 
