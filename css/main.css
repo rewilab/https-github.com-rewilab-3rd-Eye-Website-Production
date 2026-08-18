@@ -150,7 +150,7 @@ textarea:focus-visible {
     background-color: var(--dark-navy);
     background-image: linear-gradient(90deg, #0A2E5C 0%, #0C3A6E 60%, #0A2E5C 100%);
     color: var(--white);
-    padding: 8px 0;
+    padding: 5px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -175,6 +175,7 @@ textarea:focus-visible {
 .logo {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 12px;
     font-family: var(--header-font);
     font-weight: 700;
@@ -182,10 +183,12 @@ textarea:focus-visible {
     text-decoration: none;
     line-height: 1;
     flex-shrink: 0;
+    height: 128px;
+    overflow: hidden;
 }
 
 .logo img.logo-mark {
-    height: 140px;
+    height: 237px;
     width: auto;
     display: block;
 }
@@ -304,7 +307,7 @@ textarea:focus-visible {
 .hero-section.home-hero {
     background-position: center center, center center;
     background-color: var(--dark-navy);
-    background-size: 100% 100%, 100% 100%;
+    background-size: 100% auto, 100% auto;
 }
 
 .hero-content {
@@ -588,8 +591,12 @@ section {
         padding: 6px 0;
     }
 
+    .logo {
+        height: 88px;
+    }
+
     .logo img.logo-mark {
-        height: 110px;
+        height: 163px;
     }
 
     .logo .logo-text .logo-name {
@@ -655,6 +662,7 @@ section {
 
 .hero-section.about-hero {
     background-image: linear-gradient(rgba(10,46,92,0.78), rgba(10,46,92,0.86)), url('../img/header-bg.jpg');
+    background-size: 100% auto, 100% auto;
 }
 .hero-section.services-hero {
     background-image: linear-gradient(rgba(10,46,92,0.78), rgba(10,46,92,0.86)), url('../img/s1.jpg');
