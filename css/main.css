@@ -220,6 +220,18 @@ textarea:focus-visible {
     color: var(--white);
 }
 
+/* Homepage logo: matches the larger header logo treatment used on the internal pages */
+.logo.home-logo {
+    justify-content: flex-start;
+    height: 128px;
+    overflow: hidden;
+}
+
+.logo.home-logo img.logo-mark {
+    height: 237px;
+    width: auto;
+}
+
 .nav-links {
     list-style: none;
     display: flex;
@@ -323,6 +335,78 @@ textarea:focus-visible {
     margin-bottom: 40px;
     font-weight: 300;
     color: var(--light-gray);
+}
+
+/* Homepage company title (index.html only): Indian tricolour flag treatment.
+   Saffron / white / India green bands with a subtle Ashoka Chakra watermark,
+   a gentle fabric sheen, and a light sway to evoke a flag moving in a breeze. */
+.hero-content h1.flag-title {
+    position: relative;
+    display: inline-block;
+    padding: 0.55em 0.8em;
+    color: var(--navy-blue);
+    text-shadow: none;
+    background: linear-gradient(179deg,
+        var(--saffron) 0%, var(--saffron) 18%,
+        var(--white) 18%, var(--white) 82%,
+        var(--green) 82%, var(--green) 100%);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+    animation: flagSway 7s ease-in-out infinite;
+}
+
+.hero-content h1.flag-title > span {
+    position: relative;
+}
+
+/* Ashoka Chakra: 24-spoke wheel watermark centred on the white band */
+.hero-content h1.flag-title::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1.5em;
+    height: 1.5em;
+    transform: translate(-50%, -50%);
+    border: 0.06em solid rgba(10, 46, 92, 0.30);
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at center, rgba(10, 46, 92, 0.35) 0 13%, transparent 14%),
+        repeating-conic-gradient(from 0deg, rgba(10, 46, 92, 0.20) 0deg 1.5deg, transparent 1.5deg 15deg);
+    pointer-events: none;
+}
+
+/* Moving light/shadow to suggest gently rippling fabric */
+.hero-content h1.flag-title::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg,
+        rgba(0, 0, 0, 0.05) 0%, rgba(255, 255, 255, 0.16) 16%,
+        rgba(0, 0, 0, 0.04) 34%, rgba(255, 255, 255, 0.14) 52%,
+        rgba(0, 0, 0, 0.04) 70%, rgba(255, 255, 255, 0.16) 86%,
+        rgba(0, 0, 0, 0.05) 100%);
+    background-size: 240% 100%;
+    animation: fabricDrift 6s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes flagSway {
+    0%, 100% { transform: rotate(0.35deg); }
+    50%      { transform: rotate(-0.35deg); }
+}
+
+@keyframes fabricDrift {
+    from { background-position: 240% 0; }
+    to   { background-position: -240% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-content h1.flag-title,
+    .hero-content h1.flag-title::after {
+        animation: none;
+    }
 }
 
 /* Sections */
@@ -589,6 +673,14 @@ section {
 
     .logo img.logo-mark {
         height: 38px;
+    }
+
+    .logo.home-logo {
+        height: 88px;
+    }
+
+    .logo.home-logo img.logo-mark {
+        height: 163px;
     }
 
     .logo .logo-text .logo-name {
