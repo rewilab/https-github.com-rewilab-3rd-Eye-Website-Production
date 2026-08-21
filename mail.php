@@ -9,7 +9,8 @@
  *      was actually rendered by this PHP and not forged by a bot, and that a human
  *      amount of time elapsed before submit (bots submit in <3s). The token carries
  *      an HMAC of the issue time + IP, so it cannot be spoofed client-side.
- *   4. Per-IP rate limiting (file-based, no DB required).
+ *   4. Per-IP rate limiting (file-based, no DB required), keyed on a
+ *      spoof-resistant client IP (see client_ip()).
  *   5. Strict server-side validation of every field (lengths, formats, allow-lists,
  *      consent checkbox).
  *   6. Content heuristics — cap URL count and reject common spam phrases.
@@ -97,14 +98,86 @@ function verify_token(string $token): int {
     return (int)$issued;
 }
 
+// Determine the client IP used for token binding and rate limiting.
+//
+// Default: trust only REMOTE_ADDR. It is set by the web server from the
+// actual TCP connection, so a client cannot spoof it.
+//
+// X-Forwarded-For is fully client-controllable, so it is honoured ONLY when
+// the immediate peer (REMOTE_ADDR) is a verified trusted reverse proxy/CDN
+// listed in the TRUSTED_PROXIES environment variable (comma-separated IPs or
+// CIDR ranges, e.g. "10.0.0.1,203.0.113.0/24"). That header is trustworthy
+// only when such infrastructure terminates every client connection and
+// strips/rewrites any inbound X-Forwarded-For before appending the real
+// client address. Without TRUSTED_PROXIES configured there is no such
+// guarantee, so the header is ignored: an attacker rotating forged values
+// would otherwise gain unlimited fake rate-limit identities.
 function client_ip(): string {
-    // The site is served behind a reverse proxy / CDN; trust the first hop only.
-    $fwd = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
-    if ($fwd !== '') {
-        $first = trim(explode(',', $fwd)[0]);
-        if (filter_var($first, FILTER_VALIDATE_IP)) return $first;
+    $remote = $_SERVER['REMOTE_ADDR'] ?? '';
+    if (filter_var($remote, FILTER_VALIDATE_IP) === false) {
+        return '0.0.0.0';
     }
-    return $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+    if (!is_trusted_proxy($remote)) {
+        return $remote;
+    }
+    // Behind a verified trusted proxy: walk the X-Forwarded-For chain from
+    // the server outward (right to left) and stop at the first address that
+    // is not itself trusted infrastructure. Entries to the right of it are
+    // proxy-appended and therefore reliable; anything further left is raw
+    // client input.
+    $fwd = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
+    if ($fwd === '') {
+        return $remote;
+    }
+    $hops = array_map('trim', explode(',', $fwd));
+    for ($i = count($hops) - 1; $i >= 0; $i--) {
+        $candidate = $hops[$i];
+        if (filter_var($candidate, FILTER_VALIDATE_IP) === false) continue;
+        if (is_trusted_proxy($candidate)) continue;
+        return $candidate;
+    }
+    return $remote;
+}
+
+// Trusted reverse proxies/CDNs, from the TRUSTED_PROXIES env var.
+// Empty by default: no peer is trusted to supply X-Forwarded-For.
+function trusted_proxies(): array {
+    static $cache = null;
+    if ($cache !== null) return $cache;
+    $cache = [];
+    $raw = getenv('TRUSTED_PROXIES');
+    if (is_string($raw) && $raw !== '') {
+        foreach (explode(',', $raw) as $entry) {
+            $entry = trim($entry);
+            if ($entry !== '') $cache[] = $entry;
+        }
+    }
+    return $cache;
+}
+
+function is_trusted_proxy(string $ip): bool {
+    foreach (trusted_proxies() as $range) {
+        if (ip_in_range($ip, $range)) return true;
+    }
+    return false;
+}
+
+// Match $ip against a single IP or a CIDR range ("10.0.0.0/8").
+function ip_in_range(string $ip, string $range): bool {
+    if (!str_contains($range, '/')) {
+        return $ip === $range;
+    }
+    [$subnet, $bits] = explode('/', $range, 2);
+    if (!ctype_digit($bits)) return false;
+    $bits = (int)$bits;
+    $ipBin = @inet_pton($ip);
+    $subnetBin = @inet_pton($subnet);
+    if ($ipBin === false || $subnetBin === false || strlen($ipBin) !== strlen($subnetBin)) return false;
+    if ($bits < 0 || $bits > strlen($ipBin) * 8) return false;
+    $mask = str_repeat("\xff", intdiv($bits, 8));
+    if ($bits % 8 > 0) $mask .= chr(0xff << (8 - $bits % 8) & 0xff);
+    $mask = str_pad($mask, strlen($ipBin), "\0");
+    return ($ipBin & $mask) === ($subnetBin & $mask);
 }
 
 // Strip CR/LF/NUL so a value can never inject additional mail headers.
