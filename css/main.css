@@ -338,22 +338,34 @@ textarea:focus-visible {
 }
 
 /* Homepage company title (index.html only): premium Indian tricolour flag.
-   The company name sits in the white band of a waving flag built from layered
-   gradients (tricolour bands, vertical fabric folds, overhead light) with an
-   animated wavy silhouette (clip-path), a slow fabric sheen and a light sway.
-   The Ashoka Chakra sits to the right of the name, inside the white band. */
+   A dedicated .flag-banner element carries the fabric (tricolour bands, folds,
+   wavy animated silhouette), the company name sits in the white band, and a
+   24-spoke Ashoka Chakra sits to the right of the name. */
 .flag-wrap {
-    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.35));
-}
-
-.hero-content h1.flag-title {
     position: relative;
     display: inline-block;
     max-width: 100%;
-    padding: 0.8em 2.3em 0.8em 1.1em;
-    font-size: 2.3em;
-    color: var(--navy-blue);
-    text-shadow: none;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.35));
+    animation: flagSway 7s ease-in-out infinite;
+}
+
+.flag-banner {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(179deg,
+        var(--saffron) 0%, var(--saffron) 25%,
+        var(--white) 25%, var(--white) 75%,
+        var(--green) 75%, var(--green) 100%);
+    clip-path: polygon(0% 2.50%, 5% 4.52%, 10% 4.88%, 15% 3.27%, 20% 1.03%, 25% 0.00%, 30% 1.03%, 35% 3.27%, 40% 4.88%, 45% 4.52%, 50% 2.50%, 55% 0.48%, 60% 0.12%, 65% 1.73%, 70% 3.97%, 75% 5.00%, 80% 3.97%, 85% 1.73%, 90% 0.12%, 95% 0.48%, 100% 2.50%, 99.1% 33.33%, 99.1% 66.66%, 100% 97.50%, 95% 95.48%, 90% 95.12%, 85% 96.73%, 80% 98.97%, 75% 100.00%, 70% 98.97%, 65% 96.73%, 60% 95.12%, 55% 95.48%, 50% 97.50%, 45% 99.52%, 40% 99.88%, 35% 98.27%, 30% 96.03%, 25% 95.00%, 20% 96.03%, 15% 98.27%, 10% 99.88%, 5% 99.52%, 0% 97.50%);
+    animation: flagRipple 8s linear infinite;
+}
+
+/* Vertical fabric folds + overhead light shading */
+.flag-folds {
+    position: absolute;
+    inset: 0;
     background:
         linear-gradient(180deg,
             rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 26%,
@@ -361,39 +373,11 @@ textarea:focus-visible {
         repeating-linear-gradient(94deg,
             rgba(0, 0, 0, 0.05) 0 4%,
             rgba(255, 255, 255, 0.09) 8%,
-            rgba(0, 0, 0, 0.05) 12%),
-        linear-gradient(179deg,
-            var(--saffron) 0%, var(--saffron) 25%,
-            var(--white) 25%, var(--white) 75%,
-            var(--green) 75%, var(--green) 100%);
-    clip-path: polygon(0% 2.50%, 5% 4.52%, 10% 4.88%, 15% 3.27%, 20% 1.03%, 25% 0.00%, 30% 1.03%, 35% 3.27%, 40% 4.88%, 45% 4.52%, 50% 2.50%, 55% 0.48%, 60% 0.12%, 65% 1.73%, 70% 3.97%, 75% 5.00%, 80% 3.97%, 85% 1.73%, 90% 0.12%, 95% 0.48%, 100% 2.50%, 99.1% 33.33%, 99.1% 66.66%, 100% 97.50%, 95% 95.48%, 90% 95.12%, 85% 96.73%, 80% 98.97%, 75% 100.00%, 70% 98.97%, 65% 96.73%, 60% 95.12%, 55% 95.48%, 50% 97.50%, 45% 99.52%, 40% 99.88%, 35% 98.27%, 30% 96.03%, 25% 95.00%, 20% 96.03%, 15% 98.27%, 10% 99.88%, 5% 99.52%, 0% 97.50%);
-    animation: flagSway 7s ease-in-out infinite, flagRipple 8s linear infinite;
-}
-
-.hero-content h1.flag-title > span {
-    position: relative;
-}
-
-/* Ashoka Chakra: 24-spoke navy wheel to the right of the company name */
-.hero-content h1.flag-title::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 0.7em;
-    width: 0.95em;
-    height: 0.95em;
-    transform: translateY(-50%);
-    border: 0.055em solid rgba(10, 46, 92, 0.75);
-    border-radius: 50%;
-    background:
-        radial-gradient(circle at center, rgba(10, 46, 92, 0.80) 0 12%, transparent 13%),
-        repeating-conic-gradient(from 0deg, rgba(10, 46, 92, 0.55) 0deg 1.6deg, transparent 1.6deg 15deg);
-    pointer-events: none;
+            rgba(0, 0, 0, 0.05) 12%);
 }
 
 /* Slow moving sheen across the fabric */
-.hero-content h1.flag-title::after {
-    content: '';
+.flag-sheen {
     position: absolute;
     inset: 0;
     background: linear-gradient(105deg,
@@ -403,7 +387,36 @@ textarea:focus-visible {
         rgba(0, 0, 0, 0.05) 100%);
     background-size: 240% 100%;
     animation: fabricDrift 9s linear infinite;
+}
+
+/* Ashoka Chakra: 24-spoke navy wheel to the right of the company name */
+.flag-chakra {
+    position: absolute;
+    top: 50%;
+    right: 4%;
+    z-index: 2;
+    height: 52%;
+    aspect-ratio: 1 / 1;
+    transform: translateY(-50%);
+    border: 2px solid rgba(10, 46, 92, 0.75);
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at center, rgba(10, 46, 92, 0.80) 0 12%, transparent 13%),
+        repeating-conic-gradient(from 0deg, rgba(10, 46, 92, 0.55) 0deg 1.6deg, transparent 1.6deg 15deg);
     pointer-events: none;
+}
+
+.hero-content h1.flag-title {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    max-width: 100%;
+    margin: 0;
+    padding: 0.8em 2.5em 0.8em 1.2em;
+    font-size: 2.3em;
+    color: var(--navy-blue);
+    text-shadow: none;
+    background: none;
 }
 
 @keyframes flagSway {
@@ -426,8 +439,9 @@ textarea:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .hero-content h1.flag-title,
-    .hero-content h1.flag-title::after {
+    .flag-wrap,
+    .flag-banner,
+    .flag-sheen {
         animation: none;
     }
 }
@@ -720,7 +734,7 @@ section {
 
     .hero-content h1.flag-title {
         font-size: 1.15em;
-        padding: 0.7em 1.6em 0.7em 0.8em;
+        padding: 0.7em 2.2em 0.7em 0.8em;
     }
 
     .hero-content .tagline {
