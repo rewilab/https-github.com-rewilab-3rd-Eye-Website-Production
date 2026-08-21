@@ -337,47 +337,61 @@ textarea:focus-visible {
     color: var(--light-gray);
 }
 
-/* Homepage company title (index.html only): Indian tricolour flag treatment.
-   Saffron / white / India green bands with a subtle Ashoka Chakra watermark,
-   a gentle fabric sheen, and a light sway to evoke a flag moving in a breeze. */
+/* Homepage company title (index.html only): premium Indian tricolour flag.
+   The company name sits in the white band of a waving flag built from layered
+   gradients (tricolour bands, vertical fabric folds, overhead light) with an
+   animated wavy silhouette (clip-path), a slow fabric sheen and a light sway.
+   The Ashoka Chakra sits to the right of the name, inside the white band. */
+.flag-wrap {
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.35));
+}
+
 .hero-content h1.flag-title {
     position: relative;
     display: inline-block;
-    padding: 0.55em 0.8em;
+    max-width: 100%;
+    padding: 0.8em 2.3em 0.8em 1.1em;
+    font-size: 2.3em;
     color: var(--navy-blue);
     text-shadow: none;
-    background: linear-gradient(179deg,
-        var(--saffron) 0%, var(--saffron) 18%,
-        var(--white) 18%, var(--white) 82%,
-        var(--green) 82%, var(--green) 100%);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.28);
-    animation: flagSway 7s ease-in-out infinite;
+    background:
+        linear-gradient(180deg,
+            rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 26%,
+            rgba(0, 0, 0, 0) 74%, rgba(0, 0, 0, 0.14) 100%),
+        repeating-linear-gradient(94deg,
+            rgba(0, 0, 0, 0.05) 0 4%,
+            rgba(255, 255, 255, 0.09) 8%,
+            rgba(0, 0, 0, 0.05) 12%),
+        linear-gradient(179deg,
+            var(--saffron) 0%, var(--saffron) 25%,
+            var(--white) 25%, var(--white) 75%,
+            var(--green) 75%, var(--green) 100%);
+    clip-path: polygon(0% 2.50%, 5% 4.52%, 10% 4.88%, 15% 3.27%, 20% 1.03%, 25% 0.00%, 30% 1.03%, 35% 3.27%, 40% 4.88%, 45% 4.52%, 50% 2.50%, 55% 0.48%, 60% 0.12%, 65% 1.73%, 70% 3.97%, 75% 5.00%, 80% 3.97%, 85% 1.73%, 90% 0.12%, 95% 0.48%, 100% 2.50%, 99.1% 33.33%, 99.1% 66.66%, 100% 97.50%, 95% 95.48%, 90% 95.12%, 85% 96.73%, 80% 98.97%, 75% 100.00%, 70% 98.97%, 65% 96.73%, 60% 95.12%, 55% 95.48%, 50% 97.50%, 45% 99.52%, 40% 99.88%, 35% 98.27%, 30% 96.03%, 25% 95.00%, 20% 96.03%, 15% 98.27%, 10% 99.88%, 5% 99.52%, 0% 97.50%);
+    animation: flagSway 7s ease-in-out infinite, flagRipple 8s linear infinite;
 }
 
 .hero-content h1.flag-title > span {
     position: relative;
 }
 
-/* Ashoka Chakra: 24-spoke wheel watermark centred on the white band */
+/* Ashoka Chakra: 24-spoke navy wheel to the right of the company name */
 .hero-content h1.flag-title::before {
     content: '';
     position: absolute;
     top: 50%;
-    left: 50%;
-    width: 1.5em;
-    height: 1.5em;
-    transform: translate(-50%, -50%);
-    border: 0.06em solid rgba(10, 46, 92, 0.30);
+    right: 0.7em;
+    width: 0.95em;
+    height: 0.95em;
+    transform: translateY(-50%);
+    border: 0.055em solid rgba(10, 46, 92, 0.75);
     border-radius: 50%;
     background:
-        radial-gradient(circle at center, rgba(10, 46, 92, 0.35) 0 13%, transparent 14%),
-        repeating-conic-gradient(from 0deg, rgba(10, 46, 92, 0.20) 0deg 1.5deg, transparent 1.5deg 15deg);
+        radial-gradient(circle at center, rgba(10, 46, 92, 0.80) 0 12%, transparent 13%),
+        repeating-conic-gradient(from 0deg, rgba(10, 46, 92, 0.55) 0deg 1.6deg, transparent 1.6deg 15deg);
     pointer-events: none;
 }
 
-/* Moving light/shadow to suggest gently rippling fabric */
+/* Slow moving sheen across the fabric */
 .hero-content h1.flag-title::after {
     content: '';
     position: absolute;
@@ -388,13 +402,22 @@ textarea:focus-visible {
         rgba(0, 0, 0, 0.04) 70%, rgba(255, 255, 255, 0.16) 86%,
         rgba(0, 0, 0, 0.05) 100%);
     background-size: 240% 100%;
-    animation: fabricDrift 6s linear infinite;
+    animation: fabricDrift 9s linear infinite;
     pointer-events: none;
 }
 
 @keyframes flagSway {
-    0%, 100% { transform: rotate(0.35deg); }
-    50%      { transform: rotate(-0.35deg); }
+    0%, 100% { transform: rotate(0.4deg) skewY(0.3deg); }
+    50%      { transform: rotate(-0.4deg) skewY(-0.3deg); }
+}
+
+/* Travelling wave along the top/bottom edges of the flag */
+@keyframes flagRipple {
+    0%   { clip-path: polygon(0% 2.50%, 5% 4.52%, 10% 4.88%, 15% 3.27%, 20% 1.03%, 25% 0.00%, 30% 1.03%, 35% 3.27%, 40% 4.88%, 45% 4.52%, 50% 2.50%, 55% 0.48%, 60% 0.12%, 65% 1.73%, 70% 3.97%, 75% 5.00%, 80% 3.97%, 85% 1.73%, 90% 0.12%, 95% 0.48%, 100% 2.50%, 99.1% 33.33%, 99.1% 66.66%, 100% 97.50%, 95% 95.48%, 90% 95.12%, 85% 96.73%, 80% 98.97%, 75% 100.00%, 70% 98.97%, 65% 96.73%, 60% 95.12%, 55% 95.48%, 50% 97.50%, 45% 99.52%, 40% 99.88%, 35% 98.27%, 30% 96.03%, 25% 95.00%, 20% 96.03%, 15% 98.27%, 10% 99.88%, 5% 99.52%, 0% 97.50%); }
+    25%  { clip-path: polygon(0% 5.00%, 5% 3.97%, 10% 1.73%, 15% 0.12%, 20% 0.48%, 25% 2.50%, 30% 4.52%, 35% 4.88%, 40% 3.27%, 45% 1.03%, 50% 0.00%, 55% 1.03%, 60% 3.27%, 65% 4.88%, 70% 4.52%, 75% 2.50%, 80% 0.48%, 85% 0.12%, 90% 1.73%, 95% 3.97%, 100% 5.00%, 99.1% 33.33%, 99.1% 66.66%, 100% 100.00%, 95% 98.97%, 90% 96.73%, 85% 95.12%, 80% 95.48%, 75% 97.50%, 70% 99.52%, 65% 99.88%, 60% 98.27%, 55% 96.03%, 50% 95.00%, 45% 96.03%, 40% 98.27%, 35% 99.88%, 30% 99.52%, 25% 97.50%, 20% 95.48%, 15% 95.12%, 10% 96.73%, 5% 98.97%, 0% 100.00%); }
+    50%  { clip-path: polygon(0% 2.50%, 5% 0.48%, 10% 0.12%, 15% 1.73%, 20% 3.97%, 25% 5.00%, 30% 3.97%, 35% 1.73%, 40% 0.12%, 45% 0.48%, 50% 2.50%, 55% 4.52%, 60% 4.88%, 65% 3.27%, 70% 1.03%, 75% 0.00%, 80% 1.03%, 85% 3.27%, 90% 4.88%, 95% 4.52%, 100% 2.50%, 99.1% 33.33%, 99.1% 66.66%, 100% 97.50%, 95% 99.52%, 90% 99.88%, 85% 98.27%, 80% 96.03%, 75% 95.00%, 70% 96.03%, 65% 98.27%, 60% 99.88%, 55% 99.52%, 50% 97.50%, 45% 95.48%, 40% 95.12%, 35% 96.73%, 30% 98.97%, 25% 100.00%, 20% 98.97%, 15% 96.73%, 10% 95.12%, 5% 95.48%, 0% 97.50%); }
+    75%  { clip-path: polygon(0% 0.00%, 5% 1.03%, 10% 3.27%, 15% 4.88%, 20% 4.52%, 25% 2.50%, 30% 0.48%, 35% 0.12%, 40% 1.73%, 45% 3.97%, 50% 5.00%, 55% 3.97%, 60% 1.73%, 65% 0.12%, 70% 0.48%, 75% 2.50%, 80% 4.52%, 85% 4.88%, 90% 3.27%, 95% 1.03%, 100% 0.00%, 99.1% 33.33%, 99.1% 66.66%, 100% 95.00%, 95% 96.03%, 90% 98.27%, 85% 99.88%, 80% 99.52%, 75% 97.50%, 70% 95.48%, 65% 95.12%, 60% 96.73%, 55% 98.97%, 50% 100.00%, 45% 98.97%, 40% 96.73%, 35% 95.12%, 30% 95.48%, 25% 97.50%, 20% 99.52%, 15% 99.88%, 10% 98.27%, 5% 96.03%, 0% 95.00%); }
+    100% { clip-path: polygon(0% 2.50%, 5% 4.52%, 10% 4.88%, 15% 3.27%, 20% 1.03%, 25% 0.00%, 30% 1.03%, 35% 3.27%, 40% 4.88%, 45% 4.52%, 50% 2.50%, 55% 0.48%, 60% 0.12%, 65% 1.73%, 70% 3.97%, 75% 5.00%, 80% 3.97%, 85% 1.73%, 90% 0.12%, 95% 0.48%, 100% 2.50%, 99.1% 33.33%, 99.1% 66.66%, 100% 97.50%, 95% 95.48%, 90% 95.12%, 85% 96.73%, 80% 98.97%, 75% 100.00%, 70% 98.97%, 65% 96.73%, 60% 95.12%, 55% 95.48%, 50% 97.50%, 45% 99.52%, 40% 99.88%, 35% 98.27%, 30% 96.03%, 25% 95.00%, 20% 96.03%, 15% 98.27%, 10% 99.88%, 5% 99.52%, 0% 97.50%); }
 }
 
 @keyframes fabricDrift {
@@ -651,6 +674,10 @@ section {
         font-size: 3em;
     }
 
+    .hero-content h1.flag-title {
+        font-size: 1.8em;
+    }
+
     .hero-content .tagline {
         font-size: 1.4em;
     }
@@ -689,6 +716,11 @@ section {
 
     .hero-content h1 {
         font-size: 2.3em;
+    }
+
+    .hero-content h1.flag-title {
+        font-size: 1.15em;
+        padding: 0.7em 1.6em 0.7em 0.8em;
     }
 
     .hero-content .tagline {
